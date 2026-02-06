@@ -1,0 +1,9 @@
+{
+    "name": "dsteex/nginx-log-importer",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}

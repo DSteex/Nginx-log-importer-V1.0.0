@@ -1,0 +1,15 @@
+/vendor/
+composer.lock
+/logs/
+/pgdata/
+
+.env
+.vscode/
+*.code-workspace
+.idea/
+
+.DS_Store
+Thumbs.db
+*~
+
+/tmp/

@@ -1,0 +1,42 @@
+services:
+  web:
+    image: nginx:alpine
+    container_name: log_importer_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      - app
+
+  app:
+    build: .
+    container_name: log_importer_app
+    env_file:
+      - .env
+    volumes:
+      - .:/app:ro
+      - ./logs/nginx:/var/log/nginx:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17-alpine
+    container_name: log_importer_db
+    env_file:
+      - .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+
+volumes:
+  pgdata:
